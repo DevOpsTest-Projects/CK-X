@@ -17,6 +17,11 @@ RUN npm install --omit=dev
 # Bundle app source
 COPY . .
 
+# Windows worktrees may still contain CRLF despite Git's LF checkout rule.
+# Normalize before packaging exam scripts or executing the entrypoint.
+RUN find /usr/src/app -path /usr/src/app/node_modules -prune -o \
+    -type f -name '*.sh' -exec sed -i 's/\r$//' {} \;
+
 # Create logs directory
 RUN mkdir -p logs
 
@@ -37,11 +42,12 @@ RUN chown -R nodeuser:nodejs /usr/src/app
 # Expose the service port
 EXPOSE 3000
 
-# Copy entrypoint.sh to /usr/src/app
-COPY entrypoint.sh /home/nodeuser/entrypoint.sh
+# Use the normalized entrypoint rather than copying the Windows source again.
+RUN cp /usr/src/app/entrypoint.sh /home/nodeuser/entrypoint.sh
 
 # Make entrypoint.sh executable
-RUN chmod a+rx /home/nodeuser/entrypoint.sh
+RUN chmod a+rx /home/nodeuser/entrypoint.sh && \
+    /bin/sh -n /home/nodeuser/entrypoint.sh
 
 # Switch to non-root user
 USER nodeuser

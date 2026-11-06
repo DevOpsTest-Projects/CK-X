@@ -21,6 +21,16 @@
         "examDurationInMinutes": 120
       },
       {
+        "id": "ckad-003",
+        "assetPath": "assets/exams/ckad/003",
+        "name": "CKAD Quick Practice Test - 5 Questions",
+        "category": "CKAD",
+        "description": "A 30-minute test with five independent tasks covering pods, deployments, services, ConfigMaps, and Jobs.",
+        "warmUpTimeInSeconds": 260,
+        "difficulty": "Easy",
+        "examDurationInMinutes": 30
+      },
+      {
         "id": "cks-001",
         "assetPath": "assets/exams/cks/001",
         "name": "CKS Practice Lab - Kubernetes Security Essentials",
@@ -71,4 +81,4 @@
         "examDurationInMinutes": 90
       }
     ]
-  } 
+  }

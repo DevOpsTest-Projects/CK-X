@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "id": "1",
+      "namespace": "quick-pods",
+      "machineHostname": "ckad9999",
+      "question": "Create a Pod named `web-pod` in the existing `quick-pods` namespace.\n\nUse the image `nginx:1.27.5` and add the labels `app=web` and `env=practice`. Ensure the Pod is Running and Ready.\n\nSuggested time: 5 minutes. Marks: 20.",
+      "concepts": ["pods", "labels"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Pod has the required image and labels and is Running and Ready",
+          "verificationScriptFile": "q1_validate_pod.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "namespace": "quick-deployments",
+      "machineHostname": "ckad9999",
+      "question": "Create a Deployment named `frontend` in the existing `quick-deployments` namespace.\n\nUse the image `nginx:1.27.5`, set the replica count to `3`, and give the Pod template the label `app=frontend`. Ensure all three replicas are ready.\n\nSuggested time: 6 minutes. Marks: 20.",
+      "concepts": ["deployments", "replicas", "labels"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Deployment has three ready replicas with the required image and Pod label",
+          "verificationScriptFile": "q2_validate_deployment.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "namespace": "quick-services",
+      "machineHostname": "ckad9999",
+      "question": "A Deployment named `backend` is already running in the `quick-services` namespace. Its Pods have the label `app=backend` and serve HTTP on container port `80`.\n\nCreate a Service named `backend-svc` in this namespace. Set its type to `ClusterIP`, use the selector `app=backend`, and expose TCP port `8080`, targeting port `80`.\n\nSuggested time: 5 minutes. Marks: 20.",
+      "concepts": ["services", "selectors", "networking"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "ClusterIP Service selects the backend and maps TCP port 8080 to port 80",
+          "verificationScriptFile": "q3_validate_service.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "namespace": "quick-config",
+      "machineHostname": "ckad9999",
+      "question": "In the existing `quick-config` namespace, create a ConfigMap named `app-config` with the key `APP_MODE` set to `practice`.\n\nCreate a Pod named `config-pod` using image `busybox:1.37.0`. Keep it running with the command `sh -c 'sleep 3600'`. Set its environment variable `APP_MODE` using a `configMapKeyRef` to the `APP_MODE` key in `app-config` (do not hard-code the value in the Pod). Ensure the environment variable is available inside the running container.\n\nSuggested time: 8 minutes. Marks: 20.",
+      "concepts": ["configmaps", "environment-variables", "pods"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "ConfigMap is consumed through configMapKeyRef and APP_MODE is available in the container",
+          "verificationScriptFile": "q4_validate_config.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "namespace": "quick-jobs",
+      "machineHostname": "ckad9999",
+      "question": "Create a Job named `batch-check` in the existing `quick-jobs` namespace using image `busybox:1.37.0`.\n\nThe Job must print `job-complete` and exit successfully. Set `completions` to `1`, `parallelism` to `1`, and the Pod restart policy to `Never`. Wait for the Job to complete and leave the Job and its Pod in place for grading.\n\nSuggested time: 6 minutes. Marks: 20.",
+      "concepts": ["jobs", "batch-workloads", "restart-policy"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Job has the required settings, completes successfully, and logs job-complete",
+          "verificationScriptFile": "q5_validate_job.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    }
+  ]
+}
