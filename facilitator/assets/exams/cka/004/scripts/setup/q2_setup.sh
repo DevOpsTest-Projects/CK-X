@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-<<<<<<< HEAD
 source "$(dirname "$0")/../common.sh"
 create_namespace cka-net-policy
 create_namespace cka-net-outsider
@@ -35,27 +34,3 @@ for attempt in $(seq 1 15); do
   sleep 2
 done
 fail "The cluster CNI is not enforcing the default-deny NetworkPolicy."
-=======
-
-kubectl create namespace cka-image --dry-run=client -o yaml | kubectl apply -f -
-kubectl apply -f - <<'EOF'
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: catalog
-  namespace: cka-image
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: catalog
-  template:
-    metadata:
-      labels:
-        app: catalog
-    spec:
-      containers:
-        - name: web
-          image: nginx:does-not-exist
-EOF
->>>>>>> 353749d2a249621e7ff601bdb32a3c02f9d587e1

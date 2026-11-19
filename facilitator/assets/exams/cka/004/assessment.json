@@ -2,7 +2,6 @@
   "questions": [
     {
       "id": "1",
-<<<<<<< HEAD
       "namespace": "cka-net-services",
       "machineHostname": "ckad9999",
       "question": "The existing Deployment `web` in `cka-net-services` has two Pods labeled `app=web`, serving HTTP on port `80`. The existing ClusterIP Service `web-svc` has an incorrect selector and target port.\n\n1. Repair `web-svc`: selector `app=web`, TCP port `8080`, target port `80`. Confirm that its EndpointSlices contain both ready backend Pod IPs and that `client` can reach `http://web-svc:8080`.\n2. Create `web-nodeport`: type `NodePort`, selector `app=web`, TCP port `8081`, target port `80`, nodePort `30090`.\n3. Create `web-lb`: type `LoadBalancer`, selector `app=web`, TCP port `8082`, target port `80`. An external IP is not required for grading; availability depends on the cluster's load-balancer implementation.\n\nDo not modify the Deployment or the client Pod. Suggested time: 6 minutes. Marks: 20.",
@@ -11,25 +10,10 @@
         {"id": "1", "description": "Repaired ClusterIP Service has both ready endpoints and serves HTTP", "verificationScriptFile": "q1_validate_clusterip.sh", "expectedOutput": "0", "weightage": 10},
         {"id": "2", "description": "NodePort Service uses the required selector and TCP port mapping", "verificationScriptFile": "q1_validate_nodeport.sh", "expectedOutput": "0", "weightage": 5},
         {"id": "3", "description": "LoadBalancer Service uses the required selector and TCP port mapping", "verificationScriptFile": "q1_validate_loadbalancer.sh", "expectedOutput": "0", "weightage": 5}
-=======
-      "namespace": "cka-crashloop",
-      "machineHostname": "ckad9999",
-      "question": "The Pod `api-crash` in `cka-crashloop` repeatedly restarts. Inspect its status and logs to identify why it exits.\n\nReplace it with a Pod of the same name using `busybox:1.37.0` and the command `sh -c 'sleep 3600'`. Ensure it is Running and Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
-      "concepts": ["troubleshooting", "pods", "container-logs"],
-      "verification": [
-        {
-          "id": "1",
-          "description": "Pod was corrected and is Running and Ready",
-          "verificationScriptFile": "q1_validate_pod.sh",
-          "expectedOutput": "0",
-          "weightage": 20
-        }
->>>>>>> 353749d2a249621e7ff601bdb32a3c02f9d587e1
       ]
     },
     {
       "id": "2",
-<<<<<<< HEAD
       "namespace": "cka-net-policy",
       "machineHostname": "ckad9999",
       "question": "The `cka-net-policy` namespace contains an HTTP backend labeled `app=api`, a Service `api` on TCP port `80`, and client Pods `allowed` (label `access=allowed`) and `denied` (label `access=denied`). A third Pod `outsider`, in namespace `cka-net-outsider`, also has label `access=allowed`.\n\nThe existing `default-deny` NetworkPolicy blocks ingress to `app=api`. Leave it in place. Create a NetworkPolicy named `allow-client` selecting `app=api`, with policy type `Ingress`, allowing TCP port `80` only from Pods labeled `access=allowed` in the SAME namespace. Do not allow other ports, other Pods, or other namespaces. Do not add egress restrictions.\n\nVerify direct Pod-IP HTTP connectivity: `allowed` must succeed; `denied` and `outsider` must fail. Leave all provided workloads unchanged.\n\nSuggested time: 7 minutes. Marks: 20.",
@@ -37,25 +21,10 @@
       "verification": [
         {"id": "1", "description": "Policy permits only same-namespace access=allowed Pods on TCP port 80", "verificationScriptFile": "q2_validate_policy.sh", "expectedOutput": "0", "weightage": 10},
         {"id": "2", "description": "Allowed Pod connects; denied and cross-namespace Pods are blocked", "verificationScriptFile": "q2_validate_connectivity.sh", "expectedOutput": "0", "weightage": 10}
-=======
-      "namespace": "cka-image",
-      "machineHostname": "ckad9999",
-      "question": "The Deployment `catalog` in `cka-image` has no available replicas. Use its Pod events to find the image problem.\n\nUpdate it to use `nginx:1.27.5` and ensure both replicas are Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
-      "concepts": ["troubleshooting", "deployments", "container-images"],
-      "verification": [
-        {
-          "id": "1",
-          "description": "Deployment uses the correct image and both replicas are Ready",
-          "verificationScriptFile": "q2_validate_deployment.sh",
-          "expectedOutput": "0",
-          "weightage": 20
-        }
->>>>>>> 353749d2a249621e7ff601bdb32a3c02f9d587e1
       ]
     },
     {
       "id": "3",
-<<<<<<< HEAD
       "namespace": "cka-net-dns",
       "machineHostname": "ckad9999",
       "question": "The existing Service `web` in `cka-net-dns` is healthy, but Pod `dns-client` cannot resolve `web.cka-net-dns.svc.cluster.local` because its Pod DNS configuration is wrong.\n\nRepair or recreate ONLY `dns-client` using image `busybox:1.37.0` and command `[\"sh\", \"-c\", \"sleep 3600\"]`. Set `dnsPolicy: ClusterFirst` and remove the custom `dnsConfig`; do not enable host networking. Leave the Service, backend, and cluster-wide CoreDNS configuration unchanged.\n\nFrom `dns-client`, use `nslookup` to confirm that the Service FQDN resolves to the Service ClusterIP, then confirm HTTP connectivity to `http://web.cka-net-dns.svc.cluster.local`.\n\nSuggested time: 4 minutes. Marks: 20.",
@@ -63,25 +32,10 @@
       "verification": [
         {"id": "1", "description": "DNS client uses ClusterFirst without custom DNS or host networking", "verificationScriptFile": "q3_validate_dns_config.sh", "expectedOutput": "0", "weightage": 10},
         {"id": "2", "description": "CoreDNS resolves the Service ClusterIP and HTTP succeeds using its FQDN", "verificationScriptFile": "q3_validate_dns_resolution.sh", "expectedOutput": "0", "weightage": 10}
-=======
-      "namespace": "cka-service",
-      "machineHostname": "ckad9999",
-      "question": "Clients cannot reach the `payments` Service in `cka-service`. The `payments` Deployment has two Ready Pods. Inspect the Service selector and its endpoints, then correct the issue so the Service selects both Pods.\n\nSuggested time: 6 minutes. Marks: 20.",
-      "concepts": ["troubleshooting", "services", "service-discovery"],
-      "verification": [
-        {
-          "id": "1",
-          "description": "Service selects both Ready Deployment Pods",
-          "verificationScriptFile": "q3_validate_service.sh",
-          "expectedOutput": "0",
-          "weightage": 20
-        }
->>>>>>> 353749d2a249621e7ff601bdb32a3c02f9d587e1
       ]
     },
     {
       "id": "4",
-<<<<<<< HEAD
       "namespace": "cka-net-ingress",
       "machineHostname": "ckad9999",
       "question": "An Ingress controller is already installed with IngressClass `cka-net-traefik`. Namespace `cka-net-ingress` contains a healthy Service `web` on port `80` and a client Pod `client`.\n\nCreate an Ingress named `web-ingress`, using `ingressClassName: cka-net-traefik`. Route host `ingress.cka.test`, path `/`, with pathType `Prefix`, to Service `web` port `80` in this namespace. No TLS is required.\n\nTest from `client` by sending an HTTP request to `http://cka-net-traefik.cka-net-system.svc.cluster.local` with the header `Host: ingress.cka.test`. The response must contain `cka-net-ingress`. No public DNS record or external IP is needed.\n\nSuggested time: 6 minutes. Marks: 20.",
@@ -89,25 +43,10 @@
       "verification": [
         {"id": "1", "description": "Ingress class, host, Prefix path, and backend are correct", "verificationScriptFile": "q4_validate_ingress.sh", "expectedOutput": "0", "weightage": 10},
         {"id": "2", "description": "Ingress controller routes real HTTP traffic to the backend", "verificationScriptFile": "q4_validate_http.sh", "expectedOutput": "0", "weightage": 10}
-=======
-      "namespace": "cka-scheduling",
-      "machineHostname": "ckad9999",
-      "question": "The `worker-check` Deployment in `cka-scheduling` has a Pending Pod. Inspect the Pod's scheduling events and remove the invalid scheduling constraint from the Deployment.\n\nEnsure its replica is Running and Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
-      "concepts": ["troubleshooting", "scheduling", "deployments"],
-      "verification": [
-        {
-          "id": "1",
-          "description": "Invalid node selector is removed and the replica is Ready",
-          "verificationScriptFile": "q4_validate_scheduling.sh",
-          "expectedOutput": "0",
-          "weightage": 20
-        }
->>>>>>> 353749d2a249621e7ff601bdb32a3c02f9d587e1
       ]
     },
     {
       "id": "5",
-<<<<<<< HEAD
       "namespace": "cka-net-gateway",
       "machineHostname": "ckad9999",
       "question": "Gateway API v1 CRDs and a controller are installed. GatewayClass `cka-net-traefik` is provided. Namespace `cka-net-gateway` contains a healthy Service `web` on port `80` and client Pod `client`.\n\n1. Create Gateway `web-gateway` using GatewayClass `cka-net-traefik`. Add an HTTP listener named `http` on port `8000` with hostname `gateway.cka.test`; allow HTTPRoutes only from the SAME namespace. Port `8000` is the preconfigured controller entrypoint; its ClusterIP Service exposes this as port `80`.\n2. Create HTTPRoute `web-route` with hostname `gateway.cka.test`, attached to `web-gateway` listener `http`. Match path `/` using `PathPrefix` and forward to Service `web` port `80`.\n3. Confirm the Gateway is Programmed, the HTTPRoute is Accepted with ResolvedRefs, and an HTTP request from `client` to `http://cka-net-traefik.cka-net-system.svc.cluster.local` with header `Host: gateway.cka.test` returns `cka-net-gateway`.\n\nSuggested time: 7 minutes. Marks: 20.",
@@ -116,20 +55,6 @@
         {"id": "1", "description": "Gateway listener is correctly configured and Programmed", "verificationScriptFile": "q5_validate_gateway.sh", "expectedOutput": "0", "weightage": 8},
         {"id": "2", "description": "HTTPRoute has the required attachment, match, backend, and accepted references", "verificationScriptFile": "q5_validate_route.sh", "expectedOutput": "0", "weightage": 8},
         {"id": "3", "description": "Gateway controller routes real HTTP traffic to the backend", "verificationScriptFile": "q5_validate_http.sh", "expectedOutput": "0", "weightage": 4}
-=======
-      "namespace": "cka-readiness",
-      "machineHostname": "ckad9999",
-      "question": "The `web-check` Deployment in `cka-readiness` has a Running Pod that is not Ready. Inspect the readiness probe and fix its HTTP path so it matches the endpoint served by the container.\n\nEnsure the replica becomes Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
-      "concepts": ["troubleshooting", "readiness-probes", "deployments"],
-      "verification": [
-        {
-          "id": "1",
-          "description": "Readiness probe uses the working endpoint and the replica is Ready",
-          "verificationScriptFile": "q5_validate_readiness.sh",
-          "expectedOutput": "0",
-          "weightage": 20
-        }
->>>>>>> 353749d2a249621e7ff601bdb32a3c02f9d587e1
       ]
     }
   ]

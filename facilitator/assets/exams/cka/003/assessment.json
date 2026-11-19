@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "id": "1",
+      "namespace": "cka-crashloop",
+      "machineHostname": "ckad9999",
+      "question": "The Pod `api-crash` in `cka-crashloop` repeatedly restarts. Inspect its status and logs to identify why it exits.\n\nReplace it with a Pod of the same name using `busybox:1.37.0` and the command `sh -c 'sleep 3600'`. Ensure it is Running and Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
+      "concepts": ["troubleshooting", "pods", "container-logs"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Pod was corrected and is Running and Ready",
+          "verificationScriptFile": "q1_validate_pod.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "namespace": "cka-image",
+      "machineHostname": "ckad9999",
+      "question": "The Deployment `catalog` in `cka-image` has no available replicas. Use its Pod events to find the image problem.\n\nUpdate it to use `nginx:1.27.5` and ensure both replicas are Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
+      "concepts": ["troubleshooting", "deployments", "container-images"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Deployment uses the correct image and both replicas are Ready",
+          "verificationScriptFile": "q2_validate_deployment.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "namespace": "cka-service",
+      "machineHostname": "ckad9999",
+      "question": "Clients cannot reach the `payments` Service in `cka-service`. The `payments` Deployment has two Ready Pods. Inspect the Service selector and its endpoints, then correct the issue so the Service selects both Pods.\n\nSuggested time: 6 minutes. Marks: 20.",
+      "concepts": ["troubleshooting", "services", "service-discovery"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Service selects both Ready Deployment Pods",
+          "verificationScriptFile": "q3_validate_service.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "namespace": "cka-scheduling",
+      "machineHostname": "ckad9999",
+      "question": "The `worker-check` Deployment in `cka-scheduling` has a Pending Pod. Inspect the Pod's scheduling events and remove the invalid scheduling constraint from the Deployment.\n\nEnsure its replica is Running and Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
+      "concepts": ["troubleshooting", "scheduling", "deployments"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Invalid node selector is removed and the replica is Ready",
+          "verificationScriptFile": "q4_validate_scheduling.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "namespace": "cka-readiness",
+      "machineHostname": "ckad9999",
+      "question": "The `web-check` Deployment in `cka-readiness` has a Running Pod that is not Ready. Inspect the readiness probe and fix its HTTP path so it matches the endpoint served by the container.\n\nEnsure the replica becomes Ready.\n\nSuggested time: 6 minutes. Marks: 20.",
+      "concepts": ["troubleshooting", "readiness-probes", "deployments"],
+      "verification": [
+        {
+          "id": "1",
+          "description": "Readiness probe uses the working endpoint and the replica is Ready",
+          "verificationScriptFile": "q5_validate_readiness.sh",
+          "expectedOutput": "0",
+          "weightage": 20
+        }
+      ]
+    }
+  ]
+}

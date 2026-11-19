@@ -1,7 +1,7 @@
 #!/bin/bash
 # Offline tests for the real grading scripts. Requires Bash and jq, not Kubernetes.
 set -euo pipefail
-validation="$(cd "$(dirname "$0")/../assets/exams/cka/003/scripts/validation" && pwd)"
+validation="$(cd "$(dirname "$0")/../assets/exams/cka/004/scripts/validation" && pwd)"
 export MOCK_FILTER='.' MOCK_RESOURCE='' MOCK_HTTP=good MOCK_NETWORK=isolated MOCK_FAILURE=''
 
 # Mock only kubectl transport; use real jq and the production shell predicates.

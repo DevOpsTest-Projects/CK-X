@@ -5,13 +5,13 @@ const test = require('node:test');
 
 const root = path.resolve(__dirname, '..');
 const registry = JSON.parse(fs.readFileSync(path.join(root, 'assets/exams/labs.json'), 'utf8'));
-const lab = registry.labs.find(entry => entry.id === 'cka-003');
-const assets = path.join(root, 'assets/exams/cka/003');
+const lab = registry.labs.find(entry => entry.id === 'cka-004');
+const assets = path.join(root, 'assets/exams/cka/004');
 const config = JSON.parse(fs.readFileSync(path.join(assets, 'config.json'), 'utf8'));
 const { questions } = JSON.parse(fs.readFileSync(path.join(assets, config.questions), 'utf8'));
 
 test('CKA networking test is registered once with a half-hour timer', () => {
-  assert.equal(registry.labs.filter(entry => entry.id === 'cka-003').length, 1);
+  assert.equal(registry.labs.filter(entry => entry.id === 'cka-004').length, 1);
   assert.equal(lab.category, 'CKA');
   assert.equal(lab.examDurationInMinutes, 30);
   assert.equal(path.join(root, lab.assetPath), assets);
