@@ -51,6 +51,16 @@
         "examDurationInMinutes": 120
       },
       {
+        "id": "cka-003",
+        "assetPath": "assets/exams/cka/003",
+        "name": "CKA Quick Troubleshooting Test - 5 Questions",
+        "category": "CKA",
+        "description": "A 30-minute test with five easy-to-medium troubleshooting tasks covering failing Pods, Deployments, Service endpoints, scheduling, and readiness probes.",
+        "warmUpTimeInSeconds": 260,
+        "difficulty": "Medium",
+        "examDurationInMinutes": 30
+      },
+      {
         "id": "cka-001",
         "assetPath": "assets/exams/cka/001",
         "name": "CKA Practice Lab - Core Concepts",
