@@ -61,6 +61,16 @@
         "examDurationInMinutes": 60
       },
       {
+        "id": "cka-003",
+        "assetPath": "assets/exams/cka/003",
+        "name": "CKA Services & Networking - 30-Minute Test",
+        "category": "CKA",
+        "description": "Five practical CKA Services & Networking questions covering Service types and endpoints, Pod connectivity, NetworkPolicies, CoreDNS, Ingress, and Gateway API.",
+        "warmUpTimeInSeconds": 420,
+        "difficulty": "Medium",
+        "examDurationInMinutes": 30
+      },
+      {
         "id": "docker-001",
         "assetPath": "assets/exams/other/001",
         "name": "Docker Speed Run - Core Concepts",
